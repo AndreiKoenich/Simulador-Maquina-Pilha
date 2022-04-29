@@ -708,9 +708,6 @@ void inicia_programa()
         printf("ARQUITETURA E ORGANIZACAO DE COMPUTADORES II\n");
         printf("\nSIMULADOR DE MAQUINA DE PILHA\n");
         printf("\nAndrei Pochmann Koenich\n");
-        printf("Gabriel Peres da Silva\n");
-        printf("Gustavo Spellmeier Neves\n");
-        printf("Joel Guilherme da Silva Sobral Filho\n");
         printf("\n----------------------------------------\n");
 
         abre_arquivo(); /* Abre e inicia a leitura do arquivo de entrada. */
