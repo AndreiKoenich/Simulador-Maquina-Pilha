@@ -1,7 +1,6 @@
 ; Cálculo da raiz quadrada de N
 ; Como a máquina de pilha não possui entrada, N é fixo
 ; N = # ; SUBSTITUIR "#" PELO NÚMERO DESEJADO EM TODO O ARQUIVO
-; Resultado esperado: ?
 
 ; Usa o método babilônio:
 ; https://en.wikipedia.org/wiki/Methods_of_computing_square_roots9604Babylonian_method
