@@ -3,7 +3,6 @@
 ; a expressão que terá suas raízes encontradas é fixa:
 ; (@x^2 + #x + & = 0)
 ; (a = @, b = #, c = &) ; SUBSTITUIR "@", "#", "&" PELOS NÚMEROS DESEJADOS EM TODO O ARQUIVO
-; Resultados esperados: ?, ?
 
 ; Inicializando
 CLEAR
