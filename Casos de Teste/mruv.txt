@@ -5,7 +5,6 @@
 ; v0 (velocidade inicial) = #
 ; a  (aceleração)         = &
 ; t  (tempo)              = %
-; Resultado esperado: ?
 
 ; Inicializando
 CLEAR
