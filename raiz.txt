@@ -1,0 +1,189 @@
+; Cálculo da raiz quadrada de N
+; Como a máquina de pilha não possui entrada, N é fixo
+; N = # ; SUBSTITUIR "#" PELO NÚMERO DESEJADO EM TODO O ARQUIVO
+
+; Usa o método babilônio:
+; https://en.wikipedia.org/wiki/Methods_of_computing_square_roots9604Babylonian_method
+; Baseado nesse código:
+; https://www.geeksforgeeks.org/square-root-of-a-perfect-square/
+
+; Inicializando
+CLEAR
+PUSH #	; x = N			; Pilha contém [x]
+PUSH 1	; y = 1			; Pilha contém [x, y]
+
+; Como a máquina de pilha não possui controle de fluxo,
+; o número de iterações do método é fixo, e escrito por extenso
+
+; Iteração 1
+ADD		; R = (x + y)
+POP		; Pilha contém [x]
+POP		; Pilha contém []
+PUSH 2		; Pilha contém [2]
+PUSH $R		; Pilha contém [2, (x + y)]
+DIV		; R = (x + y) / 2 		(esse é nosso novo valor de x)
+POP		; Pilha contém [2]
+POP		; Pilha contém []
+PUSH $R		; Pilha contém [x]
+PUSH #		; Pilha contém [x, N]
+DIV     	; R = N / x			(esse é nosso novo valor de y)
+POP		; Pilha contém [x]
+PUSH $R		; Pilha contém [x, y]
+
+; No fim de cada iteração, a pilha contém [x, y]
+; que são os novos valores de x e y
+; que vão ser usados na próxima iteração
+
+; Iteração 2
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 3
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 4
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 5
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 6
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 7
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 8
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 9
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 10
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+PUSH #
+DIV     
+POP
+PUSH $R
+
+; Iteração 11 (última)
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+
+; A pilha contém [x]
+; x é a aproximação da raiz que queremos
+; como esse é o último passo, não precisamos calcular o próximo y
+
+; Pilha final: [x], onde x é a aproximação da raiz quadrada de N
+
+OUT

@@ -1,0 +1,47 @@
+; Equação de Movimento Retilíneo Uniformemente Variado
+; Como a máquina de pilha não possui entrada,
+; os valores de entrada são fixos:
+; s0 (posição inicial)    = @	; SUBSTITUIR "@", "#", "&", "%" PELOS NÚMEROS DESEJADOS EM TODO O ARQUIVO
+; v0 (velocidade inicial) = #
+; a  (aceleração)         = &
+; t  (tempo)              = %
+
+; Inicializando
+CLEAR
+
+PUSH 2
+PUSH &
+PUSH %
+PUSH %
+MUL
+POP
+POP
+PUSH $R	; Pilha contém [2, a, (t^2)]
+MUL
+POP
+POP
+PUSH $R	; Pilha contém [2, (a * t^2)]
+DIV
+POP
+POP
+PUSH $R	; Pilha contém [((a * t^2) / 2)]
+
+PUSH #
+PUSH %
+MUL
+POP
+POP
+PUSH $R	; Pilha contém [((a * t^2) / 2), (v0 * t)]
+PUSH @	; Pilha contém [((a * t^2) / 2), (v0 * t), s0]
+ADD
+POP
+POP
+PUSH $R	; Pilha contém [((a * t^2) / 2), ((v0 * t) + s0)]
+ADD
+POP
+POP
+PUSH $R	; Pilha contém [((a * t^2) / 2) + (v0 * t) + s0]
+
+OUT
+
+; Pilha final: [S], onde S é a posição final

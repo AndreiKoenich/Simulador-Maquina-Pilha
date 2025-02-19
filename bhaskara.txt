@@ -1,0 +1,529 @@
+; Cálculo de Bhaskara
+; Como a máquina de pilha não possui entrada,
+; a expressão que terá suas raízes encontradas é fixa:
+; (@x^2 + #x + & = 0)
+; (a = @, b = #, c = &) ; SUBSTITUIR "@", "#", "&" PELOS NÚMEROS DESEJADOS EM TODO O ARQUIVO
+
+; Inicializando
+CLEAR
+
+; Raiz 1
+
+; Calculando 2a
+PUSH 2
+PUSH @	; a
+MUL	; R = 2*a
+POP
+POP
+PUSH $R	; Pilha contém [2a]
+
+; Calculando o discriminante D
+PUSH 4
+PUSH @	; a
+MUL	; R = 4*a
+POP
+POP
+PUSH $R	
+PUSH &	; c
+MUL	; R = 4*a*c
+POP
+POP
+PUSH $R
+PUSH #	; b
+PUSH #	; b
+MUL	; R = b^2
+POP
+POP
+PUSH $R
+SUB	; R = b^2 - 4*a*c
+POP
+POP
+PUSH $R ; Pilha contém [2a, D]
+
+; Obtendo a raiz quadrada do discriminante D
+; (A porção a seguir é adaptada do programa de cálculo da raiz quadrada de N)
+
+PUSH $R		; Pilha contém [2a, D, m]
+PUSH 1		; Pilha contém [2a, D, m, n]
+
+; Iteração 1
+ADD		; R = (m + n)
+POP		; Pilha contém [2a, D, m]
+POP		; Pilha contém [2a, D]
+PUSH 2		; Pilha contém [2a, D, 2]
+PUSH $R		; Pilha contém [2a, D, 2, (m + n)]
+DIV		; R = (m + n) / 2 		(esse é nosso novo valor de m)
+POP		; Pilha contém [2a, D, 2]
+POP		; Pilha contém [2a, D]
+PUSH $R		; Pilha contém [2a, D, m]
+ADD		; R = (D + m)			; processo para copiar o valor de D para o topo da pilha
+PUSH $R		; Pilha contém [2a, D, m, (D + m)]
+SUB		; R = D
+POP		; Pilha contém [2a, D, m]
+PUSH $R		; Pilha contém [2a, D, m, D]	; D copiado
+DIV     	; R = D / m			(esse é nosso novo valor de n)
+POP		; Pilha contém [2a, D, m]
+PUSH $R		; Pilha contém [2a, D, m, n]
+
+; Iteração 2
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 3
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 4
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 5
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 6
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 7
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 8
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 9
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 10
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 11
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV		; R contém a 11a iteração de m, que é a aproximação da raiz quadrada de D
+POP		; Pilha contém [2a, D, 2] 
+POP		; Pilha contém [2a, D]
+POP		; Pilha contém [2a]
+
+PUSH $R
+; Pilha contém [2a, sqrt(D)]
+
+PUSH #	; b
+PUSH 0
+SUB	; R = -b
+POP
+POP
+PUSH $R	; Pilha contém [2a, sqrt(D), -b]
+SUB	; R = -b -sqrt(D)
+POP
+POP
+PUSH $R	; Pilha contém [2a, (-b -sqrt(D))]
+DIV	; R = (-b -sqrt(D)) / 2a	(raiz 1)
+POP
+POP
+PUSH $R ; Pilha contém [R1]
+OUT
+
+; Raiz 2
+
+; Calculando 2a
+PUSH 2
+PUSH @	; a
+MUL	; R = 2*a
+POP
+POP
+PUSH $R	; Pilha contém [R1, 2a]
+
+; Calculando o discriminante D
+PUSH 4
+PUSH @	; a
+MUL	; R = 4*a
+POP
+POP
+PUSH $R	
+PUSH &	; c
+MUL		; R = 4*a*c
+POP
+POP
+PUSH $R
+PUSH #	; b
+PUSH #	; b
+MUL	; R = b^2
+POP
+POP
+PUSH $R
+SUB	; R = b^2 - 4*a*c
+POP
+POP
+PUSH $R ; Pilha contém [R1, 2a, D]
+
+; Obtendo a raiz quadrada do discriminante D
+; (de novo)
+; (não achei outra maneira melhor de fazer com as limitações da máquina)
+
+PUSH $R		; Pilha contém [R1, 2a, D, m]
+PUSH 1		; Pilha contém [R1, 2a, D, m, n]
+
+; Iteração 1
+ADD		; R = (m + n)
+POP		; Pilha contém [R1, 2a, D, m]
+POP		; Pilha contém [R1, 2a, D]
+PUSH 2		; Pilha contém [R1, 2a, D, 2]
+PUSH $R		; Pilha contém [R1, 2a, D, 2, (m + n)]
+DIV		; R = (m + n) / 2 		(esse é nosso novo valor de m)
+POP		; Pilha contém [R1, 2a, D, 2]
+POP		; Pilha contém [R1, 2a, D]
+PUSH $R		; Pilha contém [R1, 2a, D, m]
+ADD		; R = (D + m)				; processo para copiar o valor de D para o topo da pilha
+PUSH $R		; Pilha contém [R1, 2a, D, m, (D + m)]
+SUB		; R = D
+POP		; Pilha contém [R1, 2a, D, m]
+PUSH $R		; Pilha contém [R1, 2a, D, m, D]	; D copiado
+DIV     	; R = D / m			(esse é nosso novo valor de n)
+POP		; Pilha contém [R1, 2a, D, m]
+PUSH $R		; Pilha contém [R1, 2a, D, m, n]
+
+; Iteração 2
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 3
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 4
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 5
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 6
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 7
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 8
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 9
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 10
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV	
+POP
+POP
+PUSH $R
+ADD
+PUSH $R
+SUB
+POP
+PUSH $R
+DIV     
+POP
+PUSH $R
+
+; Iteração 11
+ADD	
+POP
+POP
+PUSH 2
+PUSH $R
+DIV		; R contém a 11a iteração de m, que é a aproximação da raiz quadrada de D
+POP		; Pilha contém [R1, 2a, D, 2] 
+POP		; Pilha contém [R1, 2a, D]
+POP		; Pilha contém [R1, 2a]
+
+PUSH $R
+; Pilha contém [R1, 2a, sqrt(D)]
+
+PUSH #	; b
+PUSH 0
+SUB	; R = -b
+POP
+POP
+PUSH $R	; Pilha contém [R1, 2a, sqrt(D), -b]
+ADD	; R = -b +sqrt(D)
+POP
+POP
+PUSH $R	; Pilha contém [R1, 2a, (-b +sqrt(D))]
+DIV	; R = (-b +sqrt(D)) / 2a	(raiz 2)
+POP
+POP
+PUSH $R ; Pilha contém [R1, R2]
+OUT
+
+; Pilha final: [R1, R2], onde R1 e R2 são as raízes da função quadrática
