@@ -18,7 +18,7 @@ raiz.txt -> permite obter a raiz quadrada de um determinado número. Para escolh
 todas as ocorrências do caractere "#" pelo número desejado, no arquivo texto.
 
 bhaskara.txt -> permite obter as raízes de uma equação do segundo grau. Para escolher os coeficientes da equação
-(a,b e c), é necessário substituir as ocorrências dos núemros "@", "#", "&" pelos números desejados em todo o
+(a,b e c), é necessário substituir as ocorrências dos caracteres "@", "#", "&" pelos números desejados em todo o
 arquivo texto (a = @, b = #, c = &).
 
 mruv.txt -> permite determinar a posição final de um determinado corpo em moviimento retilíneo uniforme variado
